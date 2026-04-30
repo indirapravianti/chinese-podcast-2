@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>印尼的自然災害 — 播客報告</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --purple-50: #faf5ff;
+      --purple-100: #f3e8ff;
+      --purple-200: #e9d5ff;
+      --purple-300: #d8b4fe;
+      --purple-400: #c084fc;
+      --purple-500: #a855f7;
+      --purple-600: #9333ea;
+      --purple-700: #7e22ce;
+      --purple-bg: #f5f0ff;
+      --purple-border: #e2d6f3;
+      --text-primary: #1e1b2e;
+      --text-secondary: #5b5675;
+      --text-muted: #8c84a0;
+      --white: #ffffff;
+    }
+
+    @font-face {
+      font-family: 'Cossette Titre';
+      src: url('fonts/CossetteTitre.woff2') format('woff2'),
+           url('fonts/CossetteTitre.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Zalando Sans';
+      src: url('fonts/ZalandoSans-Regular.woff2') format('woff2'),
+           url('fonts/ZalandoSans-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Zalando Sans';
+      src: url('fonts/ZalandoSans-Bold.woff2') format('woff2'),
+           url('fonts/ZalandoSans-Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Zalando Sans', 'Segoe UI', system-ui, sans-serif;
+      background: var(--white);
+      color: var(--text-primary);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .presentation {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 100px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateX(40px);
+      background: var(--white);
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .slide-inner {
+      max-width: 960px;
+      width: 100%;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cossette Titre', 'Georgia', serif;
+    }
+
+    .chinese {
+      font-family: 'Noto Serif SC', 'Songti SC', serif;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: var(--purple-700);
+      margin-bottom: 0.4em;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--purple-600);
+      margin-bottom: 0.6em;
+      padding-bottom: 0.3em;
+      border-bottom: 3px solid var(--purple-200);
+      line-height: 1.3;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--purple-500);
+      margin-bottom: 0.4em;
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      margin-bottom: 0.8em;
+      color: var(--text-primary);
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5em;
+    }
+
+    .pinyin {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+      display: block;
+      margin-top: 0.2em;
+      margin-bottom: 0.6em;
+    }
+
+    .vocab {
+      font-weight: 700;
+      color: var(--purple-700);
+    }
+
+    .vocab-annotation {
+      font-size: 0.8rem;
+      color: var(--purple-500);
+      font-weight: 400;
+    }
+
+    .key-point {
+      background: var(--purple-bg);
+      border-left: 4px solid var(--purple-400);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 14px;
+    }
+
+    .key-point p {
+      margin-bottom: 0.2em;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .stat-card {
+      background: var(--purple-bg);
+      border: 1px solid var(--purple-border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--purple-600);
+      font-family: 'Cossette Titre', 'Georgia', serif;
+    }
+
+    .stat-card .label {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .media-placeholder {
+      background: var(--purple-100);
+      border: 2px dashed var(--purple-300);
+      border-radius: 12px;
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--purple-500);
+      font-size: 0.95rem;
+      margin: 16px 0;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .media-placeholder .icon {
+      font-size: 2.5rem;
+      opacity: 0.6;
+    }
+
+    .media-placeholder img,
+    .media-placeholder video {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 8px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      background: var(--purple-300);
+      border-radius: 50%;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 12px;
+      font-size: 0.95rem;
+    }
+
+    .vocab-table th {
+      background: var(--purple-200);
+      color: var(--purple-700);
+      padding: 10px 16px;
+      text-align: left;
+      font-family: 'Cossette Titre', 'Georgia', serif;
+      font-size: 1rem;
+    }
+
+    .vocab-table th:first-child { border-radius: 8px 0 0 0; }
+    .vocab-table th:last-child { border-radius: 0 8px 0 0; }
+
+    .vocab-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--purple-100);
+    }
+
+    .vocab-table tr:nth-child(even) td {
+      background: var(--purple-50);
+    }
+
+    .vocab-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+    .vocab-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 100;
+      background: var(--white);
+      border: 1px solid var(--purple-border);
+      border-radius: 50px;
+      padding: 8px 24px;
+      box-shadow: 0 4px 20px rgba(147, 51, 234, 0.1);
+    }
+
+    .nav button {
+      background: none;
+      border: 2px solid var(--purple-300);
+      color: var(--purple-600);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav button:hover:not(:disabled) {
+      background: var(--purple-500);
+      border-color: var(--purple-500);
+      color: var(--white);
+    }
+
+    .nav button:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      min-width: 60px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--purple-400), var(--purple-600));
+      transition: width 0.4s ease;
+      z-index: 100;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* Title slide special styling */
+    .slide.title-slide {
+      text-align: center;
+      background: linear-gradient(160deg, var(--white) 0%, var(--purple-50) 50%, var(--purple-100) 100%);
+    }
+
+    .title-slide h1 {
+      font-size: 3.2rem;
+      margin-bottom: 0.3em;
+    }
+
+    .title-slide .divider {
+      width: 80px;
+      height: 4px;
+      background: var(--purple-400);
+      border-radius: 2px;
+      margin: 20px auto;
+    }
+
+    .title-slide .meta {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 24px;
+    }
+
+    /* Section header slides */
+    .slide.section-slide {
+      text-align: center;
+      background: linear-gradient(160deg, var(--purple-50) 0%, var(--white) 100%);
+    }
+
+    .section-slide h1 {
+      font-size: 2.6rem;
+    }
+
+    .section-slide .section-number {
+      font-size: 4rem;
+      color: var(--purple-200);
+      font-family: 'Cossette Titre', 'Georgia', serif;
+      margin-bottom: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .slide {
+        padding: 40px 30px;
+      }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      .title-slide h1 { font-size: 2.2rem; }
+      .two-col { grid-template-columns: 1fr; }
+      .nav { bottom: 16px; padding: 6px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="presentation" id="presentation">
+
+  <!-- ==================== SLIDE 1: TITLE ==================== -->
+  <div class="slide title-slide active" data-slide="0">
+    <div class="slide-inner">
+      <p class="chinese" style="font-size: 1.1rem; color: var(--purple-400); margin-bottom: 8px;">播客報告</p>
+      <h1 class="chinese">印尼的自然災害</h1>
+      <h1 style="font-size: 1.6rem; color: var(--purple-500);">Natural Disasters in Indonesia</h1>
+      <div class="divider"></div>
+      <p class="subtitle chinese">
+        <span class="vocab">環太平洋火山帶</span>
+        <span class="vocab-annotation">(Huán Tàipíngyáng huǒshān dài — Ring of Fire)</span>
+        與政府應對
+      </p>
+      <p class="meta">中文課報告</p>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 2: OVERVIEW ==================== -->
+  <div class="slide" data-slide="1">
+    <div class="slide-inner">
+      <h2>Overview — 報告大綱</h2>
+      <p class="chinese" style="font-size: 1.3rem; line-height: 2;">
+        今天我會解釋三個<span class="vocab">重點</span>
+        <span class="vocab-annotation">(zhòngdiǎn — key points)</span>：
+      </p>
+      <ul style="margin-top: 16px;">
+        <li class="chinese">
+          <strong>一、</strong>印尼的<span class="vocab">地理位置</span>
+          <span class="vocab-annotation">(dìlǐ wèizhì — geographical location)</span>
+        </li>
+        <li class="chinese">
+          <strong>二、</strong><span class="vocab">環太平洋火山帶</span>
+          <span class="vocab-annotation">(Huán Tàipíngyáng huǒshān dài — Ring of Fire)</span>
+          如何導致<span class="vocab">自然災害</span>
+          <span class="vocab-annotation">(zìrán zāihài — natural disaster)</span>
+        </li>
+        <li class="chinese">
+          <strong>三、</strong>印尼<span class="vocab">政府</span>
+          <span class="vocab-annotation">(zhèngfǔ — government)</span>
+          如何<span class="vocab">應對</span>
+          <span class="vocab-annotation">(yìngduì — respond to)</span>
+          這些挑戰
+        </li>
+      </ul>
+      <p class="chinese" style="margin-top: 16px;">
+        最後，我會分享我自己的<span class="vocab">看法</span>
+        <span class="vocab-annotation">(kànfǎ — viewpoint / opinion)</span>。
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 3: SECTION — GEOGRAPHY ==================== -->
+  <div class="slide section-slide" data-slide="2">
+    <div class="slide-inner">
+      <div class="section-number">01</div>
+      <h1 class="chinese">地理位置</h1>
+      <p class="subtitle">Geographical Location</p>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 4: GEOGRAPHY ==================== -->
+  <div class="slide" data-slide="3">
+    <div class="slide-inner">
+      <h2 class="chinese">印尼在哪裡？</h2>
+      <div class="two-col">
+        <div>
+          <div class="key-point">
+            <p class="chinese">
+              位於<span class="vocab">東南亞</span>
+              <span class="vocab-annotation">(Dōngnányà — Southeast Asia)</span>
+            </p>
+            <p class="chinese">
+              在<span class="vocab">印度洋</span>
+              <span class="vocab-annotation">(Yìndùyáng — Indian Ocean)</span>
+              跟<span class="vocab">太平洋</span>
+              <span class="vocab-annotation">(Tàipíngyáng — Pacific Ocean)</span>
+              之間
+            </p>
+          </div>
+          <div class="key-point">
+            <p class="chinese">
+              <span class="vocab">群島</span>
+              <span class="vocab-annotation">(qúndǎo — archipelago)</span>
+              國家
+            </p>
+            <p class="chinese">超過<strong>17,000</strong>座<span class="vocab">島嶼</span>
+              <span class="vocab-annotation">(dǎoyǔ — islands)</span>
+            </p>
+          </div>
+          <div class="key-point">
+            <p class="chinese">
+              從西到東超過<strong>5,000公里</strong>
+            </p>
+            <p class="pinyin">≈ London to New York</p>
+          </div>
+        </div>
+        <div>
+          <div class="media-placeholder" id="map-placeholder">
+            <div class="icon">🗺️</div>
+            <span>Map of Indonesia's location</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 5: TECTONIC PLATES ==================== -->
+  <div class="slide" data-slide="4">
+    <div class="slide-inner">
+      <h2 class="chinese"><span class="vocab">板塊</span>
+        <span class="vocab-annotation">(bǎnkuài — tectonic plates)</span>
+        的交界處
+      </h2>
+      <div class="two-col">
+        <div>
+          <p class="chinese">
+            印尼位於幾個<span class="vocab">板塊</span>的<span class="vocab">交界處</span>
+            <span class="vocab-annotation">(jiāojiè chù — boundary)</span>：
+          </p>
+          <ul style="margin-top: 12px;">
+            <li class="chinese"><span class="vocab">歐亞板塊</span>
+              <span class="vocab-annotation">(Ōu-Yà bǎnkuài — Eurasian Plate)</span></li>
+            <li class="chinese"><span class="vocab">印澳板塊</span>
+              <span class="vocab-annotation">(Yìn-Ào bǎnkuài — Indo-Australian Plate)</span></li>
+            <li class="chinese"><span class="vocab">太平洋板塊</span>
+              <span class="vocab-annotation">(Tàipíngyáng bǎnkuài — Pacific Plate)</span></li>
+          </ul>
+          <div class="key-point" style="margin-top: 16px;">
+            <p class="chinese">
+              想像三塊巨大的拼圖一直在互相<span class="vocab">推擠</span>
+              <span class="vocab-annotation">(tuī jǐ — push against each other)</span>
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="media-placeholder" id="plates-placeholder">
+            <div class="icon">🧩</div>
+            <span>Diagram of tectonic plates around Indonesia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 6: GEOLOGICAL ACTIVITY ==================== -->
+  <div class="slide" data-slide="5">
+    <div class="slide-inner">
+      <h2 class="chinese"><span class="vocab">地質</span>
+        <span class="vocab-annotation">(dìzhì — geological)</span> 活動
+      </h2>
+      <p class="chinese">
+        因為這個<span class="vocab">獨特</span>
+        <span class="vocab-annotation">(dútè — unique)</span>
+        的地理位置，印尼在地質上非常<span class="vocab">活躍</span>
+        <span class="vocab-annotation">(huóyuè — active)</span>。
+      </p>
+      <div class="stat-grid" style="margin-top: 24px;">
+        <div class="stat-card">
+          <div class="number">5,000–6,000</div>
+          <div class="label chinese">每年<span class="vocab">地震</span>
+            <span class="vocab-annotation">(dìzhèn)</span> 次數</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">120+</div>
+          <div class="label chinese"><span class="vocab">活火山</span>
+            <span class="vocab-annotation">(huó huǒshān — active volcano)</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="number">#1</div>
+          <div class="label chinese">全世界活火山最多的國家</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 7: SECTION — RING OF FIRE ==================== -->
+  <div class="slide section-slide" data-slide="6">
+    <div class="slide-inner">
+      <div class="section-number">02</div>
+      <h1 class="chinese">環太平洋火山帶</h1>
+      <p class="subtitle">The Ring of Fire</p>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 8: RING OF FIRE ==================== -->
+  <div class="slide" data-slide="7">
+    <div class="slide-inner">
+      <h2 class="chinese">什麼是<span class="vocab">環太平洋火山帶</span>？</h2>
+      <div class="two-col">
+        <div>
+          <div class="key-point">
+            <p class="chinese">
+              環繞<span class="vocab">太平洋</span>的巨大<span class="vocab">馬蹄形</span>
+              <span class="vocab-annotation">(mǎtí xíng — horseshoe shape)</span>
+              區域
+            </p>
+          </div>
+          <div class="key-point">
+            <p class="chinese">
+              「<span class="vocab">環</span>」= 形狀像圓圈圍繞太平洋
+            </p>
+            <p class="chinese">
+              「<span class="vocab">火</span>」= 劇烈的<span class="vocab">火山活動</span>
+              <span class="vocab-annotation">(huǒshān huódòng — volcanic activity)</span>
+            </p>
+          </div>
+          <p class="chinese" style="margin-top: 12px;">
+            全長大約<strong>40,000公里</strong>，經過日本、菲律賓、印尼、紐西蘭，還有美洲西海岸
+          </p>
+        </div>
+        <div>
+          <div class="media-placeholder" id="ringoffire-placeholder">
+            <div class="icon">🔥</div>
+            <span>Map of the Ring of Fire</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 9: RING OF FIRE STATS ==================== -->
+  <div class="slide" data-slide="8">
+    <div class="slide-inner">
+      <h2 class="chinese">環太平洋火山帶的數據</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="number">75%</div>
+          <div class="label chinese">全世界的<span class="vocab">活火山</span>都在這裡</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">90%</div>
+          <div class="label chinese">全球<span class="vocab">地震</span>發生在這裡</div>
+        </div>
+      </div>
+      <div class="key-point" style="margin-top: 24px;">
+        <p class="chinese" style="font-size: 1.2rem;">
+          印尼位於地球上<span class="vocab">地質活動</span>最<span class="vocab">危險</span>
+          <span class="vocab-annotation">(wéixiǎn — dangerous)</span>
+          的區域之一。
+        </p>
+        <p class="chinese">
+          這是一個<span class="vocab">永久性</span>
+          <span class="vocab-annotation">(yǒngjiǔ xìng — permanent)</span>
+          的地理現實，不是可以避免或改變的。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 10: SECTION — WHY DISASTERS HAPPEN ==================== -->
+  <div class="slide section-slide" data-slide="9">
+    <div class="slide-inner">
+      <div class="section-number">03</div>
+      <h1 class="chinese">為什麼災害會發生？</h1>
+      <p class="subtitle">Why Disasters Happen — Deep Dive</p>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 11: VOLCANIC ERUPTIONS ==================== -->
+  <div class="slide" data-slide="10">
+    <div class="slide-inner">
+      <h2 class="chinese">一、<span class="vocab">火山爆發</span>
+        <span class="vocab-annotation">(huǒshān bàofā — volcanic eruption)</span>
+      </h2>
+      <div class="two-col">
+        <div>
+          <div class="key-point">
+            <p class="chinese">
+              板塊碰撞 → 一個板塊被推到另一個下面
+            </p>
+            <p class="chinese">
+              = <span class="vocab">隱沒作用</span>
+              <span class="vocab-annotation">(yǐnmò zuòyòng — subduction)</span>
+            </p>
+          </div>
+          <div class="key-point">
+            <p class="chinese">
+              地底高溫 → 岩石融化 → <span class="vocab">岩漿</span>
+              <span class="vocab-annotation">(yánjiāng — magma)</span>
+              上升 → 火山爆發
+            </p>
+          </div>
+          <p class="chinese" style="margin-top: 12px;">
+            有名的火山：<br>
+            <span class="vocab">梅拉皮火山</span>
+            <span class="vocab-annotation">(Méilāpí — Mt. Merapi)</span><br>
+            <span class="vocab">喀拉喀托火山</span>
+            <span class="vocab-annotation">(Kālākātuō — Krakatoa)</span><br>
+            <span class="vocab">錫納朋火山</span>
+            <span class="vocab-annotation">(Xīnàpéng — Mt. Sinabung)</span>
+          </p>
+        </div>
+        <div>
+          <div class="media-placeholder" id="volcano-placeholder">
+            <div class="icon">🌋</div>
+            <span>Image / video of volcanic eruption in Indonesia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 12: EARTHQUAKES ==================== -->
+  <div class="slide" data-slide="11">
+    <div class="slide-inner">
+      <h2 class="chinese">二、<span class="vocab">地震</span>
+        <span class="vocab-annotation">(dìzhèn — earthquake)</span>
+      </h2>
+      <div class="two-col">
+        <div>
+          <div class="key-point">
+            <p class="chinese">
+              板塊一直在<span class="vocab">移動</span>
+              <span class="vocab-annotation">(yídòng — move)</span>
+              —— 一年只有幾公分
+            </p>
+          </div>
+          <div class="key-point">
+            <p class="chinese">
+              卡住 → 突然<span class="vocab">釋放</span>
+              <span class="vocab-annotation">(shìfàng — release)</span>
+              → 巨大<span class="vocab">能量</span>
+              <span class="vocab-annotation">(néngliàng — energy)</span>
+            </p>
+            <p class="chinese">
+              = <span class="vocab">地震波</span>
+              <span class="vocab-annotation">(dìzhèn bō — seismic waves)</span>
+            </p>
+          </div>
+          <div class="key-point" style="background: #fef3f2; border-color: #e74c3c;">
+            <p class="chinese">
+              <strong>2004年</strong>：<span class="vocab">蘇門答臘</span>
+              <span class="vocab-annotation">(Sūménddálà — Sumatra)</span>
+              規模<strong>9.1</strong>大地震
+            </p>
+            <p class="chinese">人類歷史上最強烈的地震之一</p>
+          </div>
+        </div>
+        <div>
+          <div class="media-placeholder" id="earthquake-placeholder">
+            <div class="icon">📷</div>
+            <span>Image of earthquake damage in Indonesia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 13: TSUNAMI ==================== -->
+  <div class="slide" data-slide="12">
+    <div class="slide-inner">
+      <h2 class="chinese">三、<span class="vocab">海嘯</span>
+        <span class="vocab-annotation">(hǎixiào — tsunami)</span>
+      </h2>
+      <div class="two-col">
+        <div>
+          <div class="key-point">
+            <p class="chinese">
+              海底地震 → 推動大量<span class="vocab">海水</span> → 靠近海岸時可以超過<strong>10公尺</strong>高
+            </p>
+          </div>
+          <div class="key-point" style="background: #fef3f2; border-color: #e74c3c;">
+            <p class="chinese">
+              <strong>2004年</strong> <span class="vocab">印度洋海嘯</span>
+              <span class="vocab-annotation">(Yìndùyáng hǎixiào — Indian Ocean Tsunami)</span>
+            </p>
+            <p class="chinese">超過<strong>230,000人</strong>死亡</p>
+            <p class="chinese">
+              <span class="vocab">亞齊省</span>
+              <span class="vocab-annotation">(Yàqí shěng — Aceh province)</span>
+              遭受<span class="vocab">毀滅性</span>
+              <span class="vocab-annotation">(huǐmiè xìng — devastating)</span>
+              破壞
+            </p>
+          </div>
+          <div class="key-point" style="background: #fef3f2; border-color: #e74c3c;">
+            <p class="chinese">
+              <strong>2018年</strong>：海嘯襲擊<span class="vocab">蘇拉威西島</span>
+              <span class="vocab-annotation">(Sūlāwēixī dǎo — Sulawesi)</span>
+              的<span class="vocab">帕盧市</span>
+              <span class="vocab-annotation">(Pàlú shì — Palu city)</span>
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="media-placeholder" id="tsunami-placeholder">
+            <div class="icon">🌊</div>
+            <span>Image of 2004 tsunami aftermath</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 14: DISASTER CHAIN ==================== -->
+  <div class="slide" data-slide="13">
+    <div class="slide-inner">
+      <h2 class="chinese">災害的<span class="vocab">連鎖關係</span>
+        <span class="vocab-annotation">(liánsuǒ guānxì — chain relationship)</span>
+      </h2>
+      <div style="text-align: center; margin: 30px 0;">
+        <div style="display: inline-flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center;">
+          <div class="stat-card" style="min-width: 180px;">
+            <div class="number chinese" style="font-size: 1.2rem;">環太平洋火山帶</div>
+            <div class="label">Ring of Fire</div>
+          </div>
+          <span style="font-size: 2rem; color: var(--purple-400);">→</span>
+          <div class="stat-card" style="min-width: 160px;">
+            <div class="number chinese" style="font-size: 1.2rem;">板塊活動</div>
+            <div class="label">Plate Activity</div>
+          </div>
+          <span style="font-size: 2rem; color: var(--purple-400);">→</span>
+          <div class="stat-card" style="min-width: 160px;">
+            <div class="number chinese" style="font-size: 1.2rem;">地震 · 火山</div>
+            <div class="label">Earthquakes & Volcanoes</div>
+          </div>
+          <span style="font-size: 2rem; color: var(--purple-400);">→</span>
+          <div class="stat-card" style="min-width: 120px; border-color: #e74c3c;">
+            <div class="number chinese" style="font-size: 1.2rem; color: #e74c3c;">海嘯</div>
+            <div class="label">Tsunami</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 15: SECTION — GOVERNMENT ==================== -->
+  <div class="slide section-slide" data-slide="14">
+    <div class="slide-inner">
+      <div class="section-number">04</div>
+      <h1 class="chinese">政府的應對</h1>
+      <p class="subtitle">Government Response</p>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 16: EARLY WARNING & EDUCATION ==================== -->
+  <div class="slide" data-slide="15">
+    <div class="slide-inner">
+      <h2 class="chinese">政府的應對（一）</h2>
+      <div class="two-col">
+        <div>
+          <h3 class="chinese">一、<span class="vocab">預警系統</span>
+            <span class="vocab-annotation">(yùjǐng xìtǒng — early warning system)</span>
+          </h3>
+          <div class="key-point">
+            <p class="chinese">
+              安裝<span class="vocab">深海浮標</span>
+              <span class="vocab-annotation">(shēnhǎi fúbiāo — deep-ocean buoy)</span>
+              和<span class="vocab">地震監測站</span>
+              <span class="vocab-annotation">(dìzhèn jiāncè zhàn — seismic monitoring station)</span>
+            </p>
+            <p class="chinese">
+              機構：<strong>BMKG</strong> — <span class="vocab">氣象氣候與地球物理局</span>
+            </p>
+          </div>
+        </div>
+        <div>
+          <h3 class="chinese">二、<span class="vocab">防災教育</span>
+            <span class="vocab-annotation">(fángzāi jiàoyù — disaster prevention education)</span>
+          </h3>
+          <div class="key-point">
+            <p class="chinese">
+              學校進行<span class="vocab">避難演練</span>
+              <span class="vocab-annotation">(bìnàn yǎnliàn — evacuation drill)</span>
+            </p>
+            <p class="chinese">
+              口號：「<span class="vocab">趴下、掩護、抓穩</span>」
+            </p>
+            <p class="pinyin">pā xià, yǎnhù, zhuā wěn — Drop, Cover, Hold On</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 17: RESCUE & INFRASTRUCTURE ==================== -->
+  <div class="slide" data-slide="16">
+    <div class="slide-inner">
+      <h2 class="chinese">政府的應對（二）</h2>
+      <div class="two-col">
+        <div>
+          <h3 class="chinese">三、<span class="vocab">緊急救援</span>
+            <span class="vocab-annotation">(jǐnjí jiùyuán — emergency rescue)</span>
+          </h3>
+          <div class="key-point">
+            <p class="chinese">
+              <strong>BNPB</strong> — <span class="vocab">國家災害防治署</span>
+              <span class="vocab-annotation">(Guójiā Zāihài Fángzhì Shǔ)</span>
+            </p>
+            <p class="chinese">協調救援、醫療援助、食物和水、臨時避難所</p>
+          </div>
+          <h3 class="chinese" style="margin-top: 16px;">四、<span class="vocab">基礎建設</span>
+            <span class="vocab-annotation">(jīchǔ jiànshè — infrastructure)</span>
+            改善
+          </h3>
+          <div class="key-point">
+            <p class="chinese">
+              蓋<span class="vocab">抗震建築</span>
+              <span class="vocab-annotation">(kàng zhèn jiànzhù — earthquake-resistant building)</span>
+            </p>
+            <p class="chinese">
+              居民從高風險地區<span class="vocab">遷移</span>
+              <span class="vocab-annotation">(qiānyí — relocate)</span>
+            </p>
+          </div>
+        </div>
+        <div>
+          <h3 class="chinese">五、<span class="vocab">國際合作</span>
+            <span class="vocab-annotation">(guójì hézuò — international cooperation)</span>
+          </h3>
+          <div class="key-point">
+            <p class="chinese">
+              與<span class="vocab">聯合國</span>
+              <span class="vocab-annotation">(Liánhéguó — United Nations)</span>、日本、澳洲合作
+            </p>
+            <p class="chinese">
+              改善<span class="vocab">災害防備能力</span>
+              <span class="vocab-annotation">(zāihài fángbèi nénglì — disaster preparedness)</span>
+            </p>
+          </div>
+          <div class="media-placeholder" id="gov-placeholder" style="min-height: 120px;">
+            <div class="icon">📷</div>
+            <span>Image of BNPB response / evacuation drill</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 18: SECTION — MY OPINION ==================== -->
+  <div class="slide section-slide" data-slide="17">
+    <div class="slide-inner">
+      <div class="section-number">05</div>
+      <h1 class="chinese">我的看法</h1>
+      <p class="subtitle">My Opinion</p>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 19: OPINION ==================== -->
+  <div class="slide" data-slide="18">
+    <div class="slide-inner">
+      <h2 class="chinese">如果我是印尼的<span class="vocab">領導人</span>
+        <span class="vocab-annotation">(lǐngdǎo rén — leader)</span>…
+      </h2>
+      <ul>
+        <li class="chinese">
+          <strong>一、</strong>大幅度提升<span class="vocab">預警系統</span>
+          <span class="vocab-annotation">(yùjǐng xìtǒng)</span>
+          — 投資<span class="vocab">衛星</span>
+          <span class="vocab-annotation">(wèixīng — satellite)</span>
+          警報，確保<span class="vocab">偏遠</span>
+          <span class="vocab-annotation">(piānyuǎn — remote)</span>
+          地區也能收到
+        </li>
+        <li class="chinese">
+          <strong>二、</strong>執行更嚴格的<span class="vocab">建築法規</span>
+          <span class="vocab-annotation">(jiànzhù fǎguī — building code)</span>
+          — 全國性<span class="vocab">加固</span>
+          <span class="vocab-annotation">(jiāgù — retrofitting)</span>
+          計畫，優先學校和醫院
+        </li>
+        <li class="chinese">
+          <strong>三、</strong>建立<span class="vocab">防災文化</span>
+          <span class="vocab-annotation">(fángzāi wénhuà — disaster prevention culture)</span>
+          — 社區級演練、培訓志工、全國性<span class="vocab">宣導</span>
+          <span class="vocab-annotation">(xuāndǎo — awareness campaign)</span>
+        </li>
+      </ul>
+      <div class="key-point" style="margin-top: 16px;">
+        <p class="chinese" style="font-size: 1.15rem;">
+          把更好的<span class="vocab">科技</span>、更安全的<span class="vocab">基礎建設</span>和一個有準備的社會結合在一起，
+          才是減少自然災害<span class="vocab">衝擊</span>
+          <span class="vocab-annotation">(chōngjí — impact)</span>
+          的最有效方法。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 20: SECTION — CONCLUSION ==================== -->
+  <div class="slide section-slide" data-slide="19">
+    <div class="slide-inner">
+      <div class="section-number">06</div>
+      <h1 class="chinese">結論</h1>
+      <p class="subtitle">Conclusion</p>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 21: CONCLUSION ==================== -->
+  <div class="slide" data-slide="20">
+    <div class="slide-inner">
+      <h2 class="chinese">總結</h2>
+      <div class="key-point" style="margin-bottom: 20px;">
+        <p class="chinese">
+          印尼位於三個<span class="vocab">板塊</span>的<span class="vocab">交界處</span>，是<span class="vocab">環太平洋火山帶</span>的一部分 → 非常容易受到<span class="vocab">自然災害</span>的影響
+        </p>
+      </div>
+      <div class="key-point" style="margin-bottom: 20px;">
+        <p class="chinese">
+          <span class="vocab">地震</span>、<span class="vocab">火山爆發</span>和<span class="vocab">海嘯</span>不是隨機事件 — 是<span class="vocab">地質條件</span>
+          <span class="vocab-annotation">(dìzhì tiáojiàn — geological conditions)</span>
+          的直接結果
+        </p>
+      </div>
+      <div class="key-point" style="margin-bottom: 20px;">
+        <p class="chinese">
+          政府在預警、教育和救援方面已做出重要<span class="vocab">努力</span>
+          <span class="vocab-annotation">(nǔlì — effort)</span>，但仍有很大的<span class="vocab">進步空間</span>
+          <span class="vocab-annotation">(jìnbù kōngjiān — room for improvement)</span>
+        </p>
+      </div>
+      <p class="chinese" style="text-align: center; font-size: 1.3rem; margin-top: 24px; color: var(--purple-600);">
+        了解這些<span class="vocab">挑戰</span>
+        <span class="vocab-annotation">(tiǎozhàn — challenge)</span>
+        → 建立更安全、更有準備的社會
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 22: VOCABULARY TABLE ==================== -->
+  <div class="slide" data-slide="21">
+    <div class="slide-inner">
+      <h2 class="chinese">重要<span class="vocab">詞彙</span>
+        <span class="vocab-annotation">(cíhuì — vocabulary)</span>
+      </h2>
+      <div style="overflow-y: auto; max-height: 65vh;">
+        <table class="vocab-table">
+          <thead>
+            <tr>
+              <th class="chinese">中文</th>
+              <th>拼音 Pīnyīn</th>
+              <th>English</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="chinese">自然災害</td><td>zìrán zāihài</td><td>natural disaster</td></tr>
+            <tr><td class="chinese">環太平洋火山帶</td><td>Huán Tàipíngyáng huǒshān dài</td><td>Ring of Fire</td></tr>
+            <tr><td class="chinese">板塊</td><td>bǎnkuài</td><td>tectonic plate</td></tr>
+            <tr><td class="chinese">地震</td><td>dìzhèn</td><td>earthquake</td></tr>
+            <tr><td class="chinese">火山爆發</td><td>huǒshān bàofā</td><td>volcanic eruption</td></tr>
+            <tr><td class="chinese">海嘯</td><td>hǎixiào</td><td>tsunami</td></tr>
+            <tr><td class="chinese">隱沒作用</td><td>yǐnmò zuòyòng</td><td>subduction</td></tr>
+            <tr><td class="chinese">岩漿</td><td>yánjiāng</td><td>magma</td></tr>
+            <tr><td class="chinese">群島</td><td>qúndǎo</td><td>archipelago</td></tr>
+            <tr><td class="chinese">預警系統</td><td>yùjǐng xìtǒng</td><td>early warning system</td></tr>
+            <tr><td class="chinese">避難演練</td><td>bìnàn yǎnliàn</td><td>evacuation drill</td></tr>
+            <tr><td class="chinese">抗震建築</td><td>kàng zhèn jiànzhù</td><td>earthquake-resistant building</td></tr>
+            <tr><td class="chinese">基礎建設</td><td>jīchǔ jiànshè</td><td>infrastructure</td></tr>
+            <tr><td class="chinese">防災</td><td>fángzāi</td><td>disaster prevention</td></tr>
+            <tr><td class="chinese">偏遠地區</td><td>piānyuǎn dìqū</td><td>remote area</td></tr>
+            <tr><td class="chinese">加固</td><td>jiāgù</td><td>retrofitting</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 23: THANK YOU ==================== -->
+  <div class="slide title-slide" data-slide="22">
+    <div class="slide-inner">
+      <h1 class="chinese" style="font-size: 3rem;">謝謝大家的收聽</h1>
+      <div class="divider"></div>
+      <p class="subtitle">Thank you for listening</p>
+      <p class="chinese" style="margin-top: 30px; color: var(--text-muted);">
+        <span class="vocab">Xièxiè dàjiā de shōutīng</span>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button id="prevBtn" onclick="navigate(-1)" disabled>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <span class="slide-counter" id="slideCounter">1 / 23</span>
+  <button id="nextBtn" onclick="navigate(1)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  </button>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i < index) {
+        slide.style.transform = 'translateX(-40px)';
+      } else if (i > index) {
+        slide.style.transform = 'translateX(40px)';
+      }
+    });
+    slides[index].classList.add('active');
+    slides[index].style.transform = 'translateX(0)';
+
+    document.getElementById('prevBtn').disabled = index === 0;
+    document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+    document.getElementById('slideCounter').textContent = `${index + 1} / ${totalSlides}`;
+    document.getElementById('progressBar').style.width = `${((index + 1) / totalSlides) * 100}%`;
+  }
+
+  function navigate(direction) {
+    const newIndex = currentSlide + direction;
+    if (newIndex >= 0 && newIndex < totalSlides) {
+      currentSlide = newIndex;
+      showSlide(currentSlide);
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      navigate(1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      navigate(-1);
+    }
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      navigate(diff > 0 ? 1 : -1);
+    }
+  });
+
+  showSlide(0);
+</script>
+
+</body>
+</html>
