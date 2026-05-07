@@ -486,99 +486,98 @@
       font-size: 2.6rem;
     }
 
-    /* Chain Slide 14 — visual flow */
+    /* Chain Slide 14 — horizontal flow */
     .chain-flow {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 0;
       align-items: center;
-      margin: 16px 0;
+      justify-content: center;
+      margin: 20px 0;
+      flex-wrap: nowrap;
     }
 
     .chain-step {
       background: var(--white);
       border: var(--border-thick);
-      border-radius: 16px;
-      padding: 20px 32px;
+      border-radius: 14px;
+      padding: 14px 16px;
       text-align: center;
-      width: 340px;
-      box-shadow: var(--shadow);
+      min-width: 130px;
+      max-width: 170px;
+      box-shadow: 3px 3px 0px var(--black);
       position: relative;
       z-index: 2;
+      flex-shrink: 0;
     }
 
     .chain-step .step-icon {
-      font-size: 2rem;
-      margin-bottom: 6px;
+      font-size: 1.6rem;
+      margin-bottom: 4px;
     }
 
     .chain-step .step-cn {
-      font-size: 1.3rem;
+      font-size: 1rem;
       font-weight: 700;
     }
 
     .chain-step .step-en {
-      font-size: 0.85rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       margin-top: 2px;
     }
 
-    .chain-step.purple-card { border-color: var(--purple-dark); box-shadow: 4px 4px 0px var(--purple-dark); }
+    .chain-step .step-detail {
+      font-size: 0.68rem;
+      font-weight: 600;
+      margin-top: 6px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1.5px solid var(--black);
+      display: inline-block;
+    }
+
+    .chain-step.purple-card { border-color: var(--purple-dark); box-shadow: 3px 3px 0px var(--purple-dark); }
     .chain-step.purple-card .step-cn { color: var(--purple-dark); }
-    .chain-step.blue-card { border-color: var(--blue); box-shadow: 4px 4px 0px var(--blue); }
+    .chain-step.purple-card .step-detail { background: var(--purple-light); }
+    .chain-step.blue-card { border-color: var(--blue); box-shadow: 3px 3px 0px var(--blue); }
     .chain-step.blue-card .step-cn { color: var(--blue); }
-    .chain-step.orange-card { border-color: var(--orange); box-shadow: 4px 4px 0px var(--orange); }
+    .chain-step.blue-card .step-detail { background: var(--blue-light); }
+    .chain-step.orange-card { border-color: var(--orange); box-shadow: 3px 3px 0px var(--orange); }
     .chain-step.orange-card .step-cn { color: var(--orange); }
-    .chain-step.coral-card { border-color: var(--coral); box-shadow: 4px 4px 0px var(--coral); }
+    .chain-step.orange-card .step-detail { background: var(--yellow-light); }
+    .chain-step.coral-card { border-color: var(--coral); box-shadow: 3px 3px 0px var(--coral); }
     .chain-step.coral-card .step-cn { color: var(--coral); }
+    .chain-step.coral-card .step-detail { background: var(--coral-light); color: var(--coral); }
 
     .chain-connector {
-      width: 4px;
-      height: 32px;
+      height: 3px;
+      width: 28px;
       background: var(--black);
       position: relative;
       z-index: 1;
+      flex-shrink: 0;
     }
 
     .chain-connector::after {
       content: '';
       position: absolute;
-      bottom: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 10px solid var(--black);
-    }
-
-    .chain-side-label {
-      position: absolute;
+      right: -6px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 6px;
-      border: 1.5px solid var(--black);
-      white-space: nowrap;
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 9px solid var(--black);
     }
 
-    .chain-side-label.left { right: calc(100% + 16px); }
-    .chain-side-label.right { left: calc(100% + 16px); }
-
-    .chain-media-area {
+    .chain-split {
       display: flex;
-      gap: 16px;
-      margin-top: 20px;
-      justify-content: center;
-    }
-
-    .chain-media-area .media-placeholder {
-      min-height: 120px;
-      flex: 1;
-      max-width: 280px;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      flex-shrink: 0;
     }
 
     /* Responsive */
@@ -590,8 +589,20 @@
       .title-slide .title-card { padding: 30px; }
       .two-col { grid-template-columns: 1fr; }
       .nav { bottom: 12px; }
-      .chain-step { width: 260px; padding: 14px 20px; }
-      .chain-side-label { display: none; }
+      .chain-flow { flex-direction: column; }
+      .chain-connector { width: 3px; height: 24px; }
+      .chain-connector::after {
+        right: auto;
+        bottom: -6px;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 9px solid var(--black);
+        border-bottom: none;
+      }
+      .chain-split { flex-direction: row; }
     }
   </style>
 </head>
@@ -701,9 +712,8 @@
           </div>
         </div>
         <div>
-          <div class="media-placeholder" id="map-placeholder">
-            <div class="icon">🗺️</div>
-            <span>Map of Indonesia's location</span>
+          <div class="media-placeholder" id="map-placeholder" style="padding: 0; overflow: hidden;">
+            <img src="map_of_indonesia.jpg" alt="Map of Indonesia" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
           </div>
         </div>
       </div>
@@ -820,9 +830,8 @@
           </p>
         </div>
         <div>
-          <div class="media-placeholder" id="ringoffire-placeholder">
-            <div class="icon">🔥</div>
-            <span>Map of the Ring of Fire</span>
+          <div class="media-placeholder" id="ringoffire-placeholder" style="padding: 0; overflow: hidden; background: var(--white);">
+            <img src="Pacific_Ring_of_Fire.svg" alt="Ring of Fire map" style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px; padding: 8px;">
           </div>
         </div>
       </div>
@@ -953,9 +962,8 @@
           </div>
         </div>
         <div>
-          <div class="media-placeholder" id="earthquake-placeholder">
-            <div class="icon">📷</div>
-            <span>Image of earthquake damage in Indonesia</span>
+          <div class="media-placeholder" id="earthquake-placeholder" style="padding: 0; overflow: hidden;">
+            <img src="earthquake_damage_indonesia.jpg" alt="Earthquake damage in Indonesia" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
           </div>
         </div>
       </div>
@@ -1022,7 +1030,7 @@
           <div class="step-icon">🔥</div>
           <div class="step-cn chinese">環太平洋火山帶</div>
           <div class="step-en">Ring of Fire</div>
-          <span class="chain-side-label left" style="background: var(--purple-light);">40,000 km long</span>
+          <div class="step-detail">40,000 km</div>
         </div>
 
         <div class="chain-connector"></div>
@@ -1030,22 +1038,24 @@
         <div class="chain-step blue-card">
           <div class="step-icon">🧩</div>
           <div class="step-cn chinese">板塊活動</div>
-          <div class="step-en">Tectonic Plate Activity</div>
-          <span class="chain-side-label right" style="background: var(--blue-light);">3 plates collide</span>
+          <div class="step-en">Plate Activity</div>
+          <div class="step-detail">3 plates collide</div>
         </div>
 
         <div class="chain-connector"></div>
 
-        <div style="display: flex; gap: 16px; align-items: start;">
-          <div class="chain-step orange-card" style="width: auto; flex: 1;">
+        <div class="chain-split">
+          <div class="chain-step orange-card">
             <div class="step-icon">🌋</div>
             <div class="step-cn chinese">火山爆發</div>
-            <div class="step-en">Volcanic Eruption</div>
+            <div class="step-en">Eruption</div>
+            <div class="step-detail">120+ active</div>
           </div>
-          <div class="chain-step orange-card" style="width: auto; flex: 1;">
+          <div class="chain-step orange-card">
             <div class="step-icon">💥</div>
             <div class="step-cn chinese">地震</div>
             <div class="step-en">Earthquake</div>
+            <div class="step-detail">5,000+/yr</div>
           </div>
         </div>
 
@@ -1055,7 +1065,7 @@
           <div class="step-icon">🌊</div>
           <div class="step-cn chinese">海嘯</div>
           <div class="step-en">Tsunami</div>
-          <span class="chain-side-label left" style="background: var(--coral-light); color: var(--coral);">waves up to 10m+</span>
+          <div class="step-detail">waves 10m+</div>
         </div>
       </div>
 
@@ -1160,9 +1170,8 @@
               <span class="vocab-annotation">(zāihài fángbèi nénglì — disaster preparedness)</span>
             </p>
           </div>
-          <div class="media-placeholder" id="gov-placeholder" style="min-height: 120px;">
-            <div class="icon">📷</div>
-            <span>Image of BNPB response / evacuation drill</span>
+          <div class="media-placeholder" id="gov-placeholder" style="min-height: 120px; padding: 0; overflow: hidden;">
+            <img src="bnpb.jpeg" alt="BNPB disaster response team" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
           </div>
         </div>
       </div>
